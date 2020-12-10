@@ -173,7 +173,7 @@ void WaterPatch::soilEvaporation(double potEP)
         actEP = min(potEP * cos(inclination) * vegfunctionL1 * soilProp.evapoFactor,(waterLayer[0].relWater - soilProp.residualWater) * waterLayer[0].depthLayer);
     }
     else
-        actEP = max(0.0, min(potEP * pow(waterLayer[0].relWater / patch.vegetationPatch->fracRelWaterWP[0], 2) * cos(inclination * vegfunctionL1) * soilProp.evapoFactor,(waterLayer[0].relWater - soilProp.residualWater) * waterLayer[0].depthLayer));
+        actEP = max(0.0, min(potEP * pow(waterLayer[0].relWater / patch.vegetationPatch->fracRelWaterWP[0], 2) * cos(inclination) * vegfunctionL1 * soilProp.evapoFactor,(waterLayer[0].relWater - soilProp.residualWater) * waterLayer[0].depthLayer));
 
     //NEW: extract the transpired water from the transpiration routine to only get the evaporated water
     actEP = max(actEP - waterLayer[0].transpiredAbsWater, 0.0);
@@ -208,7 +208,7 @@ void WaterPatch::layerEvapotranspiration(int layer, double potEP)
             actEP = min(potEP * cos(inclination) * vegfunctionL1 * soilProp.evapoFactor,(waterLayer[layer].relWater - soilProp.residualWater) * waterLayer[layer].depthLayer);
         }
         else
-            actEP = max(0.0, min(potEP * pow(waterLayer[layer].relWater / WP,2) * cos(inclination * vegfunctionL1) * soilProp.evapoFactor,(waterLayer[layer].relWater - soilProp.residualWater) * waterLayer[layer].depthLayer));
+            actEP = max(0.0, min(potEP * pow(waterLayer[layer].relWater / WP,2) * cos(inclination) * vegfunctionL1 * soilProp.evapoFactor,(waterLayer[layer].relWater - soilProp.residualWater) * waterLayer[layer].depthLayer));
     }
 
     //transpiration from the lower layers
