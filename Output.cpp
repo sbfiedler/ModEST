@@ -347,9 +347,7 @@ void Output::initialiseTestFile()
     }
 
     dailyTestFile 	<< "Date" << "\t" << "Plant" << "\t" << "leafCMass[kg]" << "\t" << "rootCMass[kg]" << "\t" << "sapwoodCMass[kg]" << "\t" << "heartwoodCMass[kg]" << "\t";
-    dailyTestFile 	<< "height[m]" << "\t" << "lmToRmScal" << "\t" << "wscal" << "\t" << "nscal" << "\t" << "leafNDemand" << "\t" << "rootNDemand" << "\t";
-    dailyTestFile 	<< "sapwoodNDemand" << "\t" << "storageNDemand" << "\t" << "availableNfunc" << "\t" << "soilTempfunc" << "\t" << "NC" << "\t" << "CNfunc" << "\t";
-    dailyTestFile 	<< "avNitrogen" << "\t" << "totNdemand" << "\t" << "nitrogenAmount" << "\t" << "testAmount";
+    dailyTestFile 	<< "height[m]" << "\t" << "wScal" << "\t" << "wDemand" << "\t" << "wSupply" << "\t" << "phen" << "\t" << "totRespiration" << "\t" << "avRelSMFC" << "\t" << "prec" << "\t" << "avAbsSM" << "\t" << "potLeafC" << "\t" << "potLAI" << "\t" << "potFPC"<< "\t" << "wScalphen";
     dailyTestFile   << "\n";
 }
 
@@ -358,12 +356,7 @@ void Output::writeTestFile(int day, const VegetationLandscape& plants)
 {
     for(int i = 0; i < plants.plantList.size(); i++) {
         dailyTestFile << input.date[day] << "\t" << plants.plantList[i]->myID << "\t" << plants.plantList[i]->leafCMass << "\t" << plants.plantList[i]->rootCMass << "\t" << plants.plantList[i]->sapwoodCMass << "\t" << plants.plantList[i]->heartwoodCMass << "\t" ;
-        dailyTestFile << plants.plantList[i]->height << "\t" << plants.plantList[i]->allocationTest[0] << "\t" << plants.plantList[i]->allocationTest[1] << "\t" << plants.plantList[i]->allocationTest[2] << "\t" << plants.plantList[i]->allocationTest[3] << "\t" << plants.plantList[i]->allocationTest[4] << "\t" ;
-        dailyTestFile << plants.plantList[i]->allocationTest[5] << "\t" << plants.plantList[i]->allocationTest[6] << "\t" << plants.plantList[i]->allocationTest[7] << "\t" << plants.plantList[i]->allocationTest[8] << "\t" << plants.plantList[i]->allocationTest[9] << "\t" << plants.plantList[i]->allocationTest[10] << "\t" ;
-        dailyTestFile << plants.plantList[i]->allocationTest[11] << "\t";
-        dailyTestFile << plants.plantList[i]->allocationTest[12] << "\t";
-        dailyTestFile << plants.plantList[i]->allocationTest[13] << "\t";
-        dailyTestFile << plants.plantList[i]->allocationTest[14];
+        dailyTestFile << plants.plantList[i]->height << "\t" << plants.plantList[i]->wScal << "\t" << plants.plantList[i]->waterDemand << "\t" << plants.plantList[i]->waterSupply << "\t" << plants.plantList[i]->phenologyStatus << "\t" << plants.plantList[i]->totalRespiration <<  "\t" << plants.plantList[i]->avRelSoilMoistureFC <<  "\t" << input.prec[day]<<  "\t" << plants.plantList[i]->avAbsSoilMoisture <<  "\t" << plants.plantList[i]->potLeafCMass << "\t" << plants.plantList[i]->potentialLAI << "\t" << plants.plantList[i]->potentialFPC << "\t" << plants.plantList[i]->wScal_phen;
         dailyTestFile << "\n";
     }
 }
@@ -605,7 +598,7 @@ void Output::writeFiles(int day, const VegetationLandscape& vegetation, const Nu
         //writeNutrientFile(day, nutrientPatch);
         writePlantFile(day, vegetation);
         //writeVegetationFile(day, vegetation);
-        //writeTestFile(day, vegetation);
+        writeTestFile(day, vegetation);
         //writeTestFileB(day);
         //output->writeDebugFile(day, *nutrientPatch);
     }
@@ -627,7 +620,7 @@ Output::Output(const Input& _input, vector< vector<Patch*> >& _grid):
         initialisePlantFile();
         //initialiseVegetationFile();
         //initialiseDebugFile();
-        //initialiseTestFile();
+        initialiseTestFile();
         //initialiseTestFileB();
     }
 }

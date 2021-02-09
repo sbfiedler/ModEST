@@ -85,6 +85,7 @@ Plant::Plant(int index, const Input& _input, Landscape* _land) : myID(atof(_inpu
     totalRespiration = 0.0;
     dailyCInc = 0.0;
     heartwoodCMass = 0.0;
+    phenologyStatus = 1.0;
 
     beginning = myclock::now();
 
@@ -171,6 +172,7 @@ Plant::Plant(int _myID, string _PFTname, double _xCor, double _yCor, const Input
     totalRespiration = 0.0;
     dailyCInc = 0.0;
     heartwoodCMass = 0.0;
+    phenologyStatus = 1.0;
 
     beginning = myclock::now();
 
@@ -420,33 +422,40 @@ void Plant::vmax(double c1, double c2, double dayLength, int day) {
 }
 
 /////////////////////////////////////////////////////////
-void Plant::transpiration(int day, double dayLength)
+void Plant::calculatewScal(int day, double phen, double potLeafCMass, double potFPC)
 {
-    double gAct = gPot + gMin;
-    transpiredWater = 0.0;
+    gAct = gPot + gMin;
 
     //// WATER DEMAND
     //Tietjen et al. 2009, eqn. 10
     /*!< \todo  aspect factor and inclination missing here */
-    double potEP = 0.0023 * (input.tempMean[day] + 17.8) * pow((input.tempMax[day] - input.tempMin[day]), 0.5) * land->extraterrestrialRadiation(day); //[mm/day]
-    const double alpha = 1.1; //Maximum Priest-Taylor coefficient = 1.391 in Schaphoff et al. 2017 (changed to 1.1 after Monteith 1995)
-    const double scalingFactor = 5.0; //Conductance scaling factor from Sitch et al., 2003
+    potEP = 0.0023 * (input.tempMean[day] + 17.8) * pow((input.tempMax[day] - input.tempMin[day]), 0.5) * land->extraterrestrialRadiation(day); //[mm/day]
 
     //waterDemand = potEP * FPC * alpha * (1 - exp(-gAct * phenologyStatus/scalingFactor)); //Sitch et al. 2000, eqn. 34
     //changed since potEP is area-based and there should be the fractional plant cover in the equation
     /*!< \todo potEP in mm/day, gAct and gMin in mm/s. Is this valid? */
-    waterDemand = potEP * FPC * alpha / (1 + scalingFactor/gAct); //Schaphoff et al. 2017, eqn. 114; looks different to the equation in source code (water_stressed.c, line 135)
+    waterDemand = potEP * potFPC * alpha / (1 + scalingFactor/gAct); //Schaphoff et al. 2017, eqn. 114; looks different to the equation in source code (water_stressed.c, line 135)
 
     //// WATER SUPPLY
     //Schapoff et al. 2017, eqn. 109
     //changed since eMax is area-based and there should be the fractional plant cover in the equation (also added in the LPJml code). Also included, rootCMass/leafCMass factor have a feedback of higher root mass ratio on water yield
-    waterSupply = eMax * FPC * avRelSoilMoistureFC * phenologyStatus * (rootCMass*lmToRm)/leafCMass; //[mm/day]
+    waterSupply = 0.0;
+    if(potLeafCMass > 0) waterSupply = eMax * potFPC * avRelSoilMoistureFC * phen * (rootCMass*lmToRm)/potLeafCMass; //[mm/day]
 
     //For rare cases if waterSupply is higher than actual absolute available water which would lead to negative soil moisture then
     if(waterSupply > avAbsSoilMoisture) waterSupply = avAbsSoilMoisture;
 
-    // According to the description in Smith et al. 2001 for use in allocation routine (However not sure if this calculated as intended)
+    //According to the description in Smith et al. 2001 for use in allocation and phenology routine (However not sure if this calculated as intended)
     wScal = min(1.0, waterSupply/waterDemand);
+}
+
+/////////////////////////////////////////////////////////
+void Plant::transpiration(int day, double dayLength)
+{
+    transpiredWater = 0.0;
+
+    //Calculate gAct, potEP, waterSupply, waterDemand and wScal
+    calculatewScal(day, phenologyStatus, leafCMass, FPC);
 
     //Sitch et al. 2000, eqn. 32
     double ET = min(waterSupply, waterDemand);
@@ -541,21 +550,34 @@ void Plant::phenology(int day)
     }
 
     if(phenologyType == "raingreen") {
-        if(wScal > 0.35) /*! \todo 0.35 should probably be a PFT-specific parameter */
+        //First calculate wScal as if plant would be fully covered in leaves
+        potLeafCMass = leafCMass;
+        if(potLeafCMass == 0.0)
+            potLeafCMass = rootCMass * lmToRm;
+        potentialLAI = 0.0;
+        if(crownArea > 0) potentialLAI = (potLeafCMass * SLA) / (crownArea);
+        potentialFPC = (1 - exp(-0.5 * potentialLAI)) * crownArea; // changed for an IBM approach
+        calculatewScal(day, 1.0, potLeafCMass, potentialFPC);
+        wScal_phen = wScal;
+
+        if(wScal > 0.35) { /*! \todo 0.35 should probably be a PFT-specific parameter */
             phenologyStatus = 1.0;
-        //Senescence
-        else {
+            /*! \todo How to better resprout leaves? */
+            leafCMass += 0.0001; //add very little leaf C mass to beginn with
+        } else { //Senescence
             phenologyStatus = 0.0;
-            double Ntransfer = 0.5 * leafCMass/carbToNitroLeaves; //Smith et al. 2014: The N store is replenished up to its maximum capacity with up to 50% of the N mass of shed leaves
-            Ntransfer = min(leafNMass, Ntransfer);
-            if((storageNMass + Ntransfer) > maxNitrogenStorage()) {
-                Ntransfer = maxNitrogenStorage() - storageNMass;
+            if(leafCMass > 0.0) {
+                double Ntransfer = 0.5 * leafCMass/carbToNitroLeaves; //Smith et al. 2014: The N store is replenished up to its maximum capacity with up to 50% of the N mass of shed leaves
+                Ntransfer = min(leafNMass, Ntransfer);
+                if((storageNMass + Ntransfer) > maxNitrogenStorage()) {
+                    Ntransfer = maxNitrogenStorage() - storageNMass;
+                }
+                storageNMass += Ntransfer;
+                abovegroundNLitter += leafNMass - Ntransfer;
+                abovegroundCLitter += leafCMass;
+                leafCMass = 0.0;
+                leafNMass = 0.0;
             }
-            storageNMass += Ntransfer;
-            abovegroundNLitter += leafNMass - Ntransfer;
-            abovegroundCLitter += leafCMass;
-            leafCMass = 0.0;
-            leafNMass = 0.0;
         }
     }
 }

@@ -94,6 +94,7 @@ class Input
         vector< vector<double> > elevation;  /*!< Elevation of the landscape per patch */
 
         ////Vegetation
+        int PFTs; /*!< number of plant functional types used in this approach */
         bool spatialVegInput;   /*!< Is there spatial vegetation input available? */
         int nPFTs;  /*!< number of plant functional types the landscape should be initiated with */
         vector<string> pftNames;    /*!< List of all PFT names */

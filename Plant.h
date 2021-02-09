@@ -21,6 +21,8 @@ const double atmPa = 1e5;	/*!< Atmospheric pressure [Pa] */
 const double ambientO2Pa = 20900.0; /*!< Partial pressure of O2 in [Pa] */
 const double CO2ConvFactor = 1.0e-6;  /*!< Conversion factor for CO2 from ppmv to mole fraction */
 const double theta = 0.7; /*!< Co-limitation (shape) parameter */
+const double alpha = 1.1; /*!< Maximum Priest-Taylor coefficient = 1.391 in Schaphoff et al. 2017 (changed to 1.1 after Monteith 1995) */
+const double scalingFactor = 5.0; /*!< Conductance scaling factor from Sitch et al., 2003 */
 
 class Plant
 {
@@ -58,6 +60,7 @@ class Plant
         double waterSaturationPerDepth();
         void availablePools();
         void dispersal();
+        void calculatewScal(int day, double phen, double potLeafCMass, double potFPC);
 
         //Member variables
         int xPatch; /*!< x-patch of the plant [-] */
@@ -104,6 +107,11 @@ class Plant
         double phenologyStatus; /*!< leaf phenology status [-] */
         double avNitrogen; /*!< nitrogen availability for the plant [kg] */
         int age; /*!< age of the plant since planting or establishment [days] */
+        double waterSupply; /*!< current water supply [mm/day?] */
+        double waterDemand; /*!< current water demand [mm/day?] */
+        double wScal; /*!< water limitation factor for allocation and phenology [-] */
+        double avRelSoilMoistureFC; /*!< relative soil moisture availability as a fraction of field capacity [1] and wilting point [0] for the plant [-] */
+        double avAbsSoilMoisture; /*!< absolute soil moisture availability for the plant [-] */
 
         vector<pair<pair<int, int>, double> > intersectedPatches; /*!< patches that are intersected by this plant with first.first = x-coordinate of the patch [-], first.second = y-coordinate of the patch [-], second = relative cover of the plant [-] */
 
@@ -123,6 +131,10 @@ class Plant
         vector<double> allocationTest; /*!< test vector for allocation output values */
         void resetOutputVariables();
         double relCover;
+        double potLeafCMass;
+        double potentialLAI;
+        double potentialFPC;
+        double wScal_phen;
 
      private:
         //Member variables
@@ -174,9 +186,9 @@ class Plant
         double LAI; /*!< leaf area index [-] */
         double APAR;    /*!< absorbed photosynthetically active ratiation [W*m-2 ??] */
         double gPot; /*!< potential canopy conductance [mm/s ??] */
+        double gAct; /*!< actual canopy conductance [mm/s ??] */
+        double potEP; /*!< potential evaporation [mm/day] */
         double debtMass; /*!< current mass for future carbon debts [kg] */
-        double waterSupply; /*!< current water supply [mm/day?] */
-        double waterDemand; /*!< current water demand [mm/day?] */
         double leafCMassPreviousYear; /*!< leaf carbon mass of the last year [kg] */
         double rootCMassPreviousYear; /*!< root carbon mass of the last year [kg] */
         double sapwoodCMassPreviousYear; /*!< sapwood carbon mass of the last year [kg] */
@@ -185,12 +197,9 @@ class Plant
         double storageNMass; /*!< nitrogen storage mass [kg] */
         double NPPyesterday; /*!< yesterdays net primary productivity [kgC*day-1] */
         double nitrogenTurnover; /*!< amount of N to be reallocated form turnover of leaves, fine roots and sapwood [kg] */
-        double wScal; /*!< water limitation factor for allocation and phenology [-] */
         double lmToRmScal; /*!< leaf mass to root mass affected by most limitating stress factor (either by nScal or wScal) [-] */
-        double avRelSoilMoisture; /*!< relative soil moisture availability for the plant [-] */
-        double avRelSoilMoistureFC; /*!< relative soil moisture availability as a fraction of field capacity [1] and wilting point [0] for the plant [-] */
         double avAbsSoilMoistureNew; /*!< absolute soil moisture minus wilting point [mm] */
-        double avAbsSoilMoisture; /*!< absolute soil moisture availability for the plant [-] */
+        double avRelSoilMoisture; /*!< relative soil moisture availability for the plant [-] */
         double avSoilTemperature;  /*!< soil tenperature in the rooting zone of the plant [degC] */
         double Vmax; /*!< non-water-stressed rubisco capacity [?] */
         double NPPinMM; /*!< net daytime photosynthesis [mm*m2-1*day-1] */

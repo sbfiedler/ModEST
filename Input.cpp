@@ -70,6 +70,8 @@ void Input::readMaster()
     dailyNdeposition /= 1000.0;
 
     masterFile.ignore(fsize, ':');
+    masterFile >> PFTs;
+    masterFile.ignore(fsize, ':');
     masterFile >> spatialVegInput;
     if(!spatialVegInput) {
         masterFile.ignore(fsize, ':');
@@ -605,13 +607,13 @@ void Input::readPlantTraits()
     }
     plantTraitFile.close();
 
-    plantTraits.resize(nPFTs, vector<string>(fileLines));
+    plantTraits.resize(PFTs, vector<string>(fileLines));
 
     plantTraitFile.open(fileName.c_str(), ios::binary|ios::in);
 
     for(int properties = 0; properties < fileLines; properties++) {
         plantTraitFile >> dummy;
-        for(int PFT = 0; PFT < nPFTs; PFT++) {
+        for(int PFT = 0; PFT < PFTs; PFT++) {
             plantTraitFile >> plantTraits[PFT][properties];
         }
     }

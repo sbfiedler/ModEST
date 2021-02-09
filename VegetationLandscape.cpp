@@ -478,10 +478,10 @@ void VegetationLandscape::calculateProcesses(int day, double dayLength)
     for(int plant = 0; plant < motherPlants; plant++) {
         plantList[plant]->resetOutputVariables();
         plantList[plant]->availablePools();
-        plantList[plant]->phenology(day);
         plantList[plant]->photosynthesis(day, dayLength, plantList[plant]->optLambda); //Photosynthesis without water and nitrogen stress
-        plantList[plant]->nitrogenUptake(day, dayLength); //Nitrogen uptake (if nitrogen limitation, recalculate photosynthesis)
+        plantList[plant]->phenology(day);
         plantList[plant]->transpiration(day, dayLength); //Transpiration (if water limitation, recalculate photosynthesis)
+        if(plantList[plant]->phenologyStatus > 0) plantList[plant]->nitrogenUptake(day, dayLength); //Nitrogen uptake (if nitrogen limitation, recalculate photosynthesis)
         plantList[plant]->respiration(day);
         plantList[plant]->reproduction();
         plantList[plant]->allocation();
