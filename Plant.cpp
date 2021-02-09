@@ -429,13 +429,13 @@ void Plant::transpiration(int day, double dayLength)
     //Tietjen et al. 2009, eqn. 10
     /*!< \todo  aspect factor and inclination missing here */
     double potEP = 0.0023 * (input.tempMean[day] + 17.8) * pow((input.tempMax[day] - input.tempMin[day]), 0.5) * land->extraterrestrialRadiation(day); //[mm/day]
-    const double alpha = 1.1; //Maximum Priest-Tayloer coefficient = 1.391 in Schapoff et al. 2017 (changed to 1.1 after Monteith 1995)
+    const double alpha = 1.1; //Maximum Priest-Taylor coefficient = 1.391 in Schaphoff et al. 2017 (changed to 1.1 after Monteith 1995)
     const double scalingFactor = 5.0; //Conductance scaling factor from Sitch et al., 2003
 
     //waterDemand = potEP * FPC * alpha * (1 - exp(-gAct * phenologyStatus/scalingFactor)); //Sitch et al. 2000, eqn. 34
     //changed since potEP is area-based and there should be the fractional plant cover in the equation
     /*!< \todo potEP in mm/day, gAct and gMin in mm/s. Is this valid? */
-    waterDemand = potEP * FPC * alpha / (1 + scalingFactor/gAct); //Schapoff et al. 2017, eqn. 114; looks different to the equation in source code (water_stressed.c, line 135)
+    waterDemand = potEP * FPC * alpha / (1 + scalingFactor/gAct); //Schaphoff et al. 2017, eqn. 114; looks different to the equation in source code (water_stressed.c, line 135)
 
     //// WATER SUPPLY
     //Schapoff et al. 2017, eqn. 109
@@ -451,7 +451,7 @@ void Plant::transpiration(int day, double dayLength)
     //Sitch et al. 2000, eqn. 32
     double ET = min(waterSupply, waterDemand);
 
-    //New routine for extracing the water from the soil
+    //New routine for extracting the water from the soil
     if(ET > 0.0 && avAbsSoilMoisture > 0.0) {
         for(int i = 0; i < intersectedPatches.size(); i++) {
             for(int j = 0; j < input.nSoilLayers; j++) {
@@ -469,7 +469,7 @@ void Plant::transpiration(int day, double dayLength)
         gAct = 0;
         if(potEP > 0) {
             //gAct = scalingFactor * log(1-waterSupply / (potEP * alpha));    //Sitch et al. 2000, eqn. 35
-            gAct = scalingFactor / (((potEP * FPC * alpha) / waterSupply) - 1.0); //Schapoff et al. 2017, eqn. 114
+            gAct = scalingFactor / (((potEP * FPC * alpha) / waterSupply) - 1.0); //Schaphoff et al. 2017, eqn. 114
             if(gAct < 0) gAct = 0;
         }
         double lambda = 0.0;
@@ -541,7 +541,7 @@ void Plant::phenology(int day)
     }
 
     if(phenologyType == "raingreen") {
-        if(wScal > 0.35) /*! \todo 0.35 should probabaly be a PFT-specific parameter */
+        if(wScal > 0.35) /*! \todo 0.35 should probably be a PFT-specific parameter */
             phenologyStatus = 1.0;
         //Senescence
         else {

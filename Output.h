@@ -12,7 +12,7 @@
 
 using namespace std;
 
-const bool paper = 1; // for specific paper output
+const bool paper = 0; // for specific paper output
 
 //Forward declaration
 class Input;

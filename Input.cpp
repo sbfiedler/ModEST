@@ -605,13 +605,13 @@ void Input::readPlantTraits()
     }
     plantTraitFile.close();
 
-    plantTraits.resize(8, vector<string>(fileLines));
+    plantTraits.resize(nPFTs, vector<string>(fileLines));
 
     plantTraitFile.open(fileName.c_str(), ios::binary|ios::in);
 
     for(int properties = 0; properties < fileLines; properties++) {
         plantTraitFile >> dummy;
-        for(int PFT = 0; PFT < 8; PFT++) {
+        for(int PFT = 0; PFT < nPFTs; PFT++) {
             plantTraitFile >> plantTraits[PFT][properties];
         }
     }

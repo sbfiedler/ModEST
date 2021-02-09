@@ -7,7 +7,7 @@
 void WaterPatch::fastInfiltration(int layer)
 {
     /// \todo check and adapt for more than two layers, maybe ask Gregor (Gregor schaut wohin der größte Gradient ist)
-    /// \todo compared to EcoHyD fast infiltratrion can also occur in the first layer now
+    /// \todo compared to EcoHyD fast infiltration can also occur in the first layer now
 
     ///Saturation function g1 of vegetation roots in the respective layer
     //Originally: Britta used just shrub cover instead of roots (eqn. 3)
