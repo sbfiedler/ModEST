@@ -23,69 +23,54 @@ iniNO3: 9.92			[mg/kg]       	initial soil nitrate
 dailyNdep: 4.93			[g/ha]       	daily N deposition (NO3 + NH4)	
 
 #INITIAL VEGETATION
+PFTs: 6				[-]		number of all PFTs considered in this approach (should match number of PFTs in planTraits.txt)
 spatialInput: 0			[-]		1) spatial vegetation input available and to be read-in from vegetationMap.txt (in this case the following lines will not be read in), 0) spatial input not available, plants will be distributed randomly given the following lines
-nPFTs: 8			[-]		number of initital plant species that should be distributed over the landscape
-
-############
-#  PFT 1   #
-############
-name: EL			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 62			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.9674072			[m]		mean height of the individuals
-sdHeight: 0.3274506			[m]		standard deviation of the height of the individuals	
-
-############
-#  PFT 2   #
-############
-name: EA			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 63			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.8125568			[m]		mean height of the individuals
-sdHeight: 0.3017796			[m]		standard deviation of the height of the individuals	
-
-############
-#  PFT 3   #
-############
-name: AA			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 63			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 1.4394417			[m]		mean height of the individuals
-sdHeight: 0.4484882			[m]		standard deviation of the height of the individuals	
+nPFTs: 1			[-]		number of initital plant species that should be distributed over the landscape (should match with the following number of blocks with initial PFT characteristics)
 
 ############
 #  PFT 4   #
 ############
-name: AM			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 62			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 1.0167619			[m]		mean height of the individuals
-sdHeight: 0.3966436			[m]		standard deviation of the height of the individuals	
+name: PFT4			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 1			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals	
+
+############
+#  PFT 1   #
+############
+name: PFT1			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 85			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals	
+
+############
+#  PFT 2   #
+############
+name: PFT2			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 85			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals	
+
+############
+#  PFT 3   #
+############
+name: PFT3			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 85			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals	
 
 ############
 #  PFT 5   #
 ############
-name: CP			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 63			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.608467			[m]		mean height of the individuals
-sdHeight: 0.197308			[m]		standard deviation of the height of the individuals	
+name: PFT5			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 85			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals	
 
 ############
 #  PFT 6   #
 ############
-name: CQ			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 63			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.7312376			[m]		mean height of the individuals
-sdHeight: 0.2074013			[m]		standard deviation of the height of the individuals	
-
-############
-#  PFT 7   #
-############
-name: HL			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 62			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.2959292			[m]		mean height of the individuals
-sdHeight: 0.1239122			[m]		standard deviation of the height of the individuals	
-
-############
-#  PFT 8   #
-############
-name: BS			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
-nIndiviuals: 62			[-]		number of individuals that should be randomly ditributed over the landscape
-meanHeight: 0.4572917			[m]		mean height of the individuals
-sdHeight: 0.3394749			[m]		standard deviation of the height of the individuals	
+name: PFT6			[-]		name of the species or plant functional type (PFT) from plantTraits.txt
+nIndiviuals: 85			[-]		number of individuals that should be randomly ditributed over the landscape
+meanHeight: 0.5			[m]		mean height of the individuals
+sdHeight: 0			[m]		standard deviation of the height of the individuals

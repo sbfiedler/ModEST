@@ -1,44 +1,44 @@
-PFT	EL	EA	AA	AM	BS	HL	CQ	CP
-PhenologyType	evergreen	evergreen	evergreen	evergreen	evergreen	evergreen	evergreen	evergreen
-GDD5	NA	NA	NA	NA	NA	NA	NA	NA
-SLA[m2/kg]	4.14	3.3	6.4	6.17	5.42	4.07	3.35	3.18
-LeafAreaToSapwoodArea[-]	8000	8000	8000	8000	8000	8000	8000	8000
-LeafMassToRootMass[-]	0.92	2.06	0.43	0.47	0.8	1.54	1.73	0.96
-Allom2HeightDiameter[-]	34.9	39.15	43.075	33.235	141.98	61.959	10.248	63.614
-Allom3HeightDiameter[-]	0.79	0.82	0.825	0.825	1.33	1.171	0.685	1.002
-Allom1SelfThinning[-]	585.485	599.371	589.553	596.315	599.332	210.474	411.548	597.588
-ReinickeRP[-]	1.6	1.6	1.6	1.6	1.6	1.6	1.6	1.6
-MaxCrownArea[m2]	100	100	50	50	40	10	15	15
-PhotosyntheticPathway[-]	C3	C3	C3	C3	C3	C3	C3	C3
-CO2UptakeEfficiency[-]	0.08	0.08	0.08	0.08	0.08	0.08	0.08	0.08
-TemperatureLimit1[degC]	-4	-4	-4	-4	-4	-4	-4	-4
-TemperatureLimit2[degC]	20	20	20	20	20	20	20	20
-TemperatureLimit3[degC]	30	30	30	30	30	30	30	30
-TemperatureLimit4[degC]	42	42	42	42	42	42	42	42
-optLambda[-]	0.8	0.8	0.8	0.8	0.8	0.8	0.8	0.8
-gMin[mm/s]	0.64	0.975	0.992	0.999	0.306	0.326	0.928	0.301
-wiltingPoint[cm]	10000	10000	10000	10000	10000	10000	10000	10000
-maxWaterTransportCapacity[-]	12.953	14.612	5.0925.092	5.544	8.819	12.169	5.162	5.020
-LeafRespirationFraction[-]	0.015	0.015	0.015	0.015	0.015	0.015	0.015	0.015
-RespirationCoefficient[-]	0.057	0.026	0.069	0.050	0.052	1.192	0.326	0.759
-fractionalGrowthRespiration[-]	0.25	0.25	0.25	0.25	0.25	0.25	0.25	0.25
-CarbonToNitrogenLeaves[-]	32.4	53.4	16.9	20.4	53	72.4	36.7	48.7
-CarbonToNitrogenSapwood[-]	100	172.6	41.9	50.8	112	92.9	86.3	81.9
-CarbonToNitrogenRoots[-]	84.6	123.18	34.6	44.6	73.6	54.75	49.9	100.6
-minLeafCtoN[-]	29.1	46.8	13.9	19.8	38.3	66.2	34.5	40.5
-maxLeafCtoN[-]	34.7	58.6	20.9	21	71.1	83.7	38.9	61.4
-NStorageConst[-]	0.05	0.05	0.05	0.05	0.05	0.05	0.05	0.05
-halfSaturationNConcentration[gN*m-3]	1.48	1.48	1.48	1.48	1.48	1.48	1.48	1.48
-NUptakePerRootC[gN*kgC-1*day-1]	2.8	2.8	2.8	2.8	2.8	2.8	2.8	2.8
-leafTurnoverTime[years]	1.65	1.65	1.7075	1.7075	2.948333333	2.8675	2.06	0.968333333
-rootTurnoverTime[years]	2	2	2	2	2	2	2	2
-sapwoodTurnoverTime[years]	20	20	20	20	20	20	20	20
-seedMass[mg]	0.87	7.95	15.64	28.67	36.67	23.9	0.91	0.0462
-meanDispersalDistance[m]	13.815	13.815	1.708	1.708	4.812	1.203	4.01	1.604
-sdDispersalDistance[m]	2	2	2	2	2	2	2	2
-germinationProb[-]	0.97	0.92	1	1	0.88	0.96	0.9	1
-saplingLAI[-]	5.042	5.996	1.072	5.997	0.501	2.621	2.865	1.675
-woodDensity[kgC*m-3]	973.791	824.946	951.424	815.68	771.1	832.5135	904.984	846.363
-mortThreshold[-]	1.021	1.424	0.849	1.186	1.646	1.542	1.633	0.902
-relRootsL1[-]	0.023	0.194	0.48	0.027	0.765	0.011	0.293	0.999
-relRootsL2[-]	0.977	0.806	0.52	0.973	0.235	0.989	0.707	0.001
+PFT	PFT1	PFT2	PFT3	PFT4	PFT5	PFT6
+PhenologyType	evergreen	evergreen	evergreen	raingreen	evergreen	evergreen
+GDD5	NA	NA	NA	NA	NA	NA
+SLA[m2/kg]	12.421	4.7766	8.082	14.704	5.6	2.612
+LeafAreaToSapwoodArea[-]	8000	8000	8000	8000	8000	8000
+LeafMassToRootMass[-]	1	1	1	1	1	1
+Allom2HeightDiameter[-]	29.83	1.81	6.13	9.74	7.94	4
+Allom3HeightDiameter[-]	1.13	-0.11	0.5	0.34	-0.07	0.29
+Allom1SelfThinning[-]	22.65	29.16	21.05	21.21	32.15	35.61
+ReinickeRP[-]	0.51	0.72	0.53	0.46	0.46	-0.12
+MaxCrownArea[m2]	36	39	29	30	82	40
+PhotosyntheticPathway[-]	C3	C3	C3	C3	C3	C3
+CO2UptakeEfficiency[-]	0.08	0.08	0.08	0.08	0.08	0.08
+TemperatureLimit1[degC]	-4	-4	-4	-4	-4	-4
+TemperatureLimit2[degC]	20	20	20	20	20	20
+TemperatureLimit3[degC]	30	30	30	30	30	30
+TemperatureLimit4[degC]	42	42	42	42	42	42
+optLambda[-]	0.8	0.8	0.8	0.8	0.8	0.8
+gMin[mm/s]	0.5	0.3	0.3	0.5	0.3	0.3
+wiltingPoint[cm]	23460	23460	23460	23460	23460	23460
+maxWaterTransportCapacity[-]	5	5	5	5	5	5
+LeafRespirationFraction[-]	0.015	0.015	0.015	0.015	0.015	0.015
+RespirationCoefficient[-]	0.066	0.066	0.066	0.066	0.066	0.066
+fractionalGrowthRespiration[-]	0.25	0.25	0.25	0.25	0.25	0.25
+CarbonToNitrogenLeaves[-]	44	94.01	51.87	44.68	97.62	161.87
+CarbonToNitrogenSapwood[-]	100.76	142.43	109.79	101.6	144.49	172.25
+CarbonToNitrogenRoots[-]	75.94	101.61	81.5	76.46	102.88	119.98
+minLeafCtoN[-]	40.08	67.67	48.48	40.2	77.68	139.65
+maxLeafCtoN[-]	47.4	142.29	59.44	49.97	115.82	219.75
+NStorageConst[-]	0.05	0.05	0.05	0.15	0.05	0.05
+halfSaturationNConcentration[gN*m-3]	1.48	1.48	1.48	1.48	1.48	1.48
+NUptakePerRootC[gN*kgC-1*day-1]	2.8	2.8	2.8	2.8	2.8	2.8
+leafTurnoverTime[years]	NA	NA	NA	NA	NA	NA
+rootTurnoverTime[years]	NA	NA	NA	NA	NA	NA
+sapwoodTurnoverTime[years]	NA	NA	NA	NA	NA	NA
+seedMass[mg]	34.35	20.11	13.42	37.77	25.24	40.6
+meanDispersalDistance[m]	76.7	1.59	7.64	11.59	6.34	2.78
+sdDispersalDistance[m]	2	2	2	2	2	2
+germinationProb[-]	84	88.46	87.52	80.75	81.87	85.75
+saplingLAI[-]	1.5	1.5	1.5	1.5	1.5	1.5
+woodDensity[kgC*m-3]	624.2	597.8	606.7	637.4	623.3	668.3
+mortThreshold[-]	0.9	0.9	0.9	0.9	0.9	0.9
+relRootsL1[-]	0.69	0.87	0.65	0.77	0.64	0.45
+relRootsL2[-]	0.31	0.13	0.35	0.23	0.36	0.55
