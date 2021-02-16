@@ -12,7 +12,7 @@ void Input::readMaster()
     if(exe)
         fileName = "Input" + delimiter + "master.txt";
     else
-        fileName = ".." + delimiter + "ModEST" + delimiter + "Input" + delimiter + "master.txt";
+        fileName = ".." + delimiter + "ModEST" + delimiter + "Input" + delimiter + "master.txt"; //
 
     ifstream masterFile;
 

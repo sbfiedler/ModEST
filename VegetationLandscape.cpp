@@ -533,10 +533,10 @@ void VegetationLandscape::dispersal(int day, int plant)
             double yCor = plantList[plant]->yCor + ((plantList[plant]->seedList[seed].distance * sin(plantList[plant]->seedList[seed].direction))) / 100.0;
 
             //If outside landscape, adapt coordinates for closed boundary conditions
-            if(xCor < 0.0) xCor = xLength + xCor;
-            else if(xCor > xLength) xCor = xCor - xLength;
-            if(yCor < 0.0) yCor = yLength + yCor;
-            else if(yCor > yLength) yCor = yCor - yLength;
+            if(xCor < 0.0) xCor = xLength - fmod(-xCor,xLength);
+            else if(xCor > xLength) xCor = fmod(xCor,xLength);
+            if(yCor < 0.0) yCor = yLength - fmod(-yCor,yLength);
+            else if(yCor > yLength) yCor = fmod(yCor, yLength);
 
             int xPatch = int(xCor / input.cellSize);
             int yPatch = int(yCor / input.cellSize);

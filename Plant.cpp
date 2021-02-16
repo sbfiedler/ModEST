@@ -763,7 +763,6 @@ void Plant::respiration(int day)
 /////////////////////////////////////////////////////////
 void Plant::mortality()
 {
-    //NEW
     double deltaCMass = (leafCMass + sapwoodCMass + rootCMass) / totalCMassPreviousYear;
 
     if(deltaCMass <= mortThreshold) {
