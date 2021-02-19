@@ -50,6 +50,8 @@ void Input::readMaster()
     masterFile.ignore(fsize, ':');
     masterFile >> simEndDate;
     masterFile.ignore(fsize, ':');
+    masterFile >> leapYears;
+    masterFile.ignore(fsize, ':');
     masterFile >> measuredSolRadiation;
 
     masterFile.ignore(fsize, ':');
@@ -137,11 +139,13 @@ void Input::calculateSimDays()
             if(month == 1) endDay = 31;
             if(month == 2) {
                 endDay = 28;
-                if(year % 4 == 0)
-                    if(year % 100 != 0)
-                        endDay = 29;
-                if(year % 100 == 0 && year % 400 == 0)
-                        endDay = 29;
+                if(leapYears) {
+                    if(year % 4 == 0)
+                        if(year % 100 != 0)
+                            endDay = 29;
+                    if(year % 100 == 0 && year % 400 == 0)
+                            endDay = 29;
+                }
             }
             if(month == 3) endDay = 31;
             if(month == 4) endDay = 30;
@@ -179,11 +183,13 @@ void Input::calculateSimDays()
                 if(month == 1) endDay = 31;
                 if(month == 2) {
                     endDay = 28;
-                    if(year % 4 == 0)
-                        if(year % 100 != 0)
-                            endDay = 29;
-                    if(year % 100 == 0 && year % 400 == 0)
-                            endDay = 29;
+                    if(leapYears) {
+                        if(year % 4 == 0)
+                            if(year % 100 != 0)
+                                endDay = 29;
+                        if(year % 100 == 0 && year % 400 == 0)
+                                endDay = 29;
+                    }
                 }
                 if(month == 3) endDay = 31;
                 if(month == 4) endDay = 30;
@@ -207,11 +213,13 @@ void Input::calculateSimDays()
             if(month == 1) endDay = 31;
             if(month == 2) {
                 endDay = 28;
-                if(year % 4 == 0)
-                    if(year % 100 != 0)
-                        endDay = 29;
-                if(year % 100 == 0 && year % 400 == 0)
-                        endDay = 29;
+                if(leapYears) {
+                    if(year % 4 == 0)
+                        if(year % 100 != 0)
+                            endDay = 29;
+                    if(year % 100 == 0 && year % 400 == 0)
+                            endDay = 29;
+                }
             }
             if(month == 3) endDay = 31;
             if(month == 4) endDay = 30;

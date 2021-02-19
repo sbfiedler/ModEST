@@ -75,6 +75,7 @@ class Input
         vector<int> depthLayers;  /*!< Depth of each soil layer per patch */
         double iniSurfaceWater;  /*!< Inital surface water in mm */
         vector<double> iniWaterLayer;  /*!< Inital water content of the layers in vol% */
+        bool leapYears; /*!< Should leap years be considered because the weather input data includes leap years? */
         bool measuredSolRadiation; /*!< Is there measured soil radiation available to read-in? */
         double iniNH4;  /*!< Initial ammonium per kg soil [mg/kg] */
         double iniNO3;  /*!< Initial nitrate per kg soil [mg/kg] */
