@@ -588,10 +588,12 @@ void Output::writeVegetationOutputPaper2(int day, const VegetationLandscape& veg
 void Output::writeFiles(int day, const VegetationLandscape& vegetation, const NutrientPatch& nutrientPatch, const WaterLandscape& water)
 {
     if(paper) {
-        writeWaterOutputPaper2(day, water);
-        writeNutrientOutputPaper2(day, nutrientPatch);
-        writePlantOutputPaper2(day, vegetation);
-        //writeVegetationOutputPaper2(day, vegetation);
+        if(day >= (input.simDays - 10*365)) { // only write output for the last 10 years to save writing and reading time
+            writeWaterOutputPaper2(day, water);
+            writeNutrientOutputPaper2(day, nutrientPatch);
+            writePlantOutputPaper2(day, vegetation);
+            //writeVegetationOutputPaper2(day, vegetation);
+        }
     }
     else {
         writeWaterFile(day, water);

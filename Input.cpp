@@ -300,7 +300,7 @@ void Input::readWeather()
         cout << date[simDays-1] << "\t" <<  prec[simDays-1] <<  "\t\t" << tempMean[simDays-1] <<  "\t\t" << tempMin[simDays-1] <<  "\t\t" << tempMax[simDays-1] <<  "\t\t" << ambientCO2[simDays-1] << "\t\t" << solRadiation[simDays-1] << endl << endl;
     }
     else {
-        cout << "Date\t\t" <<  "Prec[mm]\t" << "MeanTemp[degC]\t" << "MinTemp[degC]\t" << "MaxTemp[degC]\t" << endl;
+        cout << "Date\t\t" <<  "Prec[mm]\t" << "MeanTemp[degC]\t" << "MinTemp[degC]\t" << "MaxTemp[degC]\t" << "AmbientCO2[ppmv]" << endl;
         cout << date[0] << "\t" <<  prec[0] << "\t\t" << tempMean[0] << "\t\t" << tempMin[0] << "\t\t" << tempMax[0] << "\t\t" << ambientCO2[0] << endl;
         cout << "...\t\t" << "...\t\t" << "...\t\t" << "...\t\t" << "..." << endl;
         cout << date[simDays-1] << "\t" <<  prec[simDays-1] << "\t\t" << tempMean[simDays-1] << "\t\t" << tempMin[simDays-1] << "\t\t" << tempMax[simDays-1] << "\t\t" << ambientCO2[simDays-1] << endl << endl;
